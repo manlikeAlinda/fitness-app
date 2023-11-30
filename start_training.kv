@@ -1,0 +1,87 @@
+#:kivy 2.0.0
+#:import dp kivy.metrics.dp
+#:import utils kivy.utils
+
+<TrainingScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('FAF6F0')  # Light creamy background color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        # Main content area
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            pos_hint: {'center_y': 0.5}
+            padding: dp(24)
+            spacing: dp(15)
+
+            Widget:
+                size_hint_y: None
+                height: dp(150)  # Adjust or remove this Widget if not needed
+
+            Label:
+                text: 'Training'
+                size_hint_y: None
+                height: self.texture_size[1]
+                font_size: '24sp'
+                bold: True
+                color: utils.get_color_from_hex('000000')  # Black color for text
+
+            Label:
+                text: '15 triangle pushups'
+                size_hint_y: None
+                height: self.texture_size[1]
+                font_size: '18sp'
+                color: utils.get_color_from_hex('000000')  # Black color for text
+
+            Label:
+                id: timer_label
+                text: '00:00:00'
+                font_size: '24sp'
+                size_hint_y: None
+                height: self.texture_size[1]
+                color: utils.get_color_from_hex('E63946')  # Red color for the timer
+
+            Button:
+                text: 'Start Training'
+                size_hint_y: None
+                height: dp(48)
+                background_normal: ''
+                background_color: utils.get_color_from_hex('4CAF50')  # Green for the button background
+                color: utils.get_color_from_hex('FAF6F0')  # Light creamy text color
+                on_release: root.start_training()
+
+            Button:
+                text: 'Stop Training'
+                size_hint_y: None
+                height: dp(48)
+                background_normal: ''
+                background_color: utils.get_color_from_hex('F44336')  # Red for the button background
+                color: utils.get_color_from_hex('FAF6F0')  # Light creamy text color
+                on_release: root.stop_training()
+
+            Button:
+                text: 'Reset Training'
+                size_hint_y: None
+                height: dp(48)
+                background_normal: ''
+                background_color: utils.get_color_from_hex('2196F3')  # Blue for the button background
+                color: utils.get_color_from_hex('FAF6F0')  # Light creamy text color
+                on_release: root.reset_training()
+
+            Button:
+                text: 'Back to Dashboard'
+                size_hint_y: None
+                height: dp(48)
+                background_normal: ''
+                background_color: utils.get_color_from_hex('2196F3')  # Blue for the button background
+                color: utils.get_color_from_hex('FAF6F0')  # Light creamy text color
+                on_release: app.root.current = 'dashboard'
+
+            # Add additional widgets or padding as needed to match the design of signup.kv

@@ -1,0 +1,96 @@
+#:kivy 2.0.0
+#:import dp kivy.metrics.dp
+#:import utils kivy.utils
+
+<HeartRateScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('FAF6F0')  # Light creamy background color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Widget:
+            # This empty widget serves as spacing from the top
+            size_hint_y: None
+            height: dp(10)
+
+        Label:
+            text: 'Heart Rate Measurement'
+            font_size: '24sp'
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1]
+            color: utils.get_color_from_hex('000000')  # Black color for text
+            padding_y: dp(8)
+
+        Label:
+            text: 'Place your finger on the sensor and relax.'
+            font_size: '16sp'
+            size_hint_y: None
+            height: self.texture_size[1]
+            color: utils.get_color_from_hex('000000')  # Black color for text
+            padding: dp(16), dp(8)
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(16), dp(16), dp(16), dp(16)
+            spacing: dp(10)
+
+            # Real-time heart rate display
+            BoxLayout:
+                size_hint_y: None
+                height: dp(100)
+                padding: dp(16), dp(8), dp(16), dp(8)
+
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex('FFFFFF')  # White background for heart rate display
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [dp(8)]
+
+                Label:
+                    id: heart_rate_display
+                    text: '72 BPM'  # Placeholder for heart rate value
+                    font_size: '48sp'
+                    bold: True
+                    color: utils.get_color_from_hex('E63946')  # Red color for heart rate text
+
+            # Measurement Instructions
+            BoxLayout:
+                size_hint_y: None
+                height: dp(100)
+                padding: dp(16), dp(8), dp(16), dp(8)
+
+                Label:
+                    text: 'Stay still and quiet while measuring or Do not talk or move your finger.'
+                    font_size: '16sp'
+                    color: utils.get_color_from_hex('000000')  # Black color for text
+                    halign: 'center'
+                    valign: 'middle'
+                    text_size: self.width - dp(32), None
+
+            # Start measurement button
+            Button:
+                text: 'Start Measurement'
+                size_hint_y: None
+                height: dp(50)
+                background_normal: ''
+                background_color: utils.get_color_from_hex('4CAF50')  # Green for the button background
+                color: utils.get_color_from_hex('FAF6F0')  # Light creamy text color
+                on_release: root.start_measurement()  # Call the start_measurement function when pressed
+
+            # Back to dashboard button
+            Button:
+                text: 'Back to Dashboard'
+                size_hint_y: None
+                height: dp(50)
+                background_normal: ''
+                background_color: utils.get_color_from_hex('000000')  # Red for the button background
+                color: utils.get_color_from_hex('FAF6F0')  # Light creamy text color
+                on_release: app.root.current = 'dashboard'  # Go back to the dashboard screen when pressed
+

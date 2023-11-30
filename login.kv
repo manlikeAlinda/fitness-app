@@ -1,0 +1,109 @@
+#:kivy 2.0.0
+#:import dp kivy.metrics.dp
+#:import utils kivy.utils
+#:import hex kivy.utils.get_color_from_hex
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: hex('FAF6F0')  # Light creamy background color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: dp(24)
+            spacing: dp(15)
+
+            Widget:
+                size_hint_y: None
+                height: dp(150)
+                canvas.before:
+                    Color:
+                        rgba: hex('F4EAE0')  # Creamy orange for the top wave
+                    RoundedRectangle:
+                        size: self.width - dp(48), dp(150)
+                        pos: self.x + dp(24), self.y
+                        radius: [dp(60), dp(60), 0, 0]
+
+            Label:
+                text: 'Login'
+                size_hint_y: None
+                height: self.texture_size[1]
+                font_size: '24sp'
+                bold: True
+                color: hex('000000')  # Black color for text
+
+            Label:
+                text: 'Please login to continue'
+                size_hint_y: None
+                height: self.texture_size[1]
+                font_size: '16sp'
+                color: hex('000000')  # Black color for text
+
+            TextInput:
+                id: username_input
+                size_hint_y: None
+                height: dp(48)
+                hint_text: 'Enter your username'
+                multiline: False
+                padding: [dp(16), dp(12), dp(16), dp(12)]
+                background_color: 0, 0, 0, 0  # Transparent background
+                canvas.before:
+                    Color:
+                        rgba: hex('000000')  # Black color for text
+                    Line:
+                        width: 1.5
+                        rectangle: (self.x + 1, self.y + 1, self.width - 2, self.height - 2)
+                
+            TextInput:
+                id: password_input
+                size_hint_y: None
+                height: dp(48)
+                hint_text: 'Enter your password'
+                multiline: False
+                padding: [dp(16), dp(12), dp(16), dp(12)]
+                password: True
+                background_color: 0, 0, 0, 0  # Transparent background
+                canvas.before:
+                    Color:
+                        rgba: hex('000000')  # Black color for text
+                    Line:
+                        width: 1.5
+                        rectangle: (self.x + 1, self.y + 1, self.width - 2, self.height - 2)
+                
+            Button:
+                text: 'Login'
+                size_hint_y: None
+                height: dp(48)
+                background_normal: ''
+                background_color: hex('000000')  # Black for the button background
+                color: hex('FAF6F0')  # Light creamy text color
+                font_size: '18sp'
+                on_release: root.login()
+
+            Button:
+                text: 'Dont have an account? Sign up here!'
+                size_hint_y: None
+                height: dp(48)
+                background_normal: ''
+                background_color: utils.get_color_from_hex('000000')  # Black for the button background
+                color: utils.get_color_from_hex('FAF6F0')  # Light creamy text color
+                font_size: '18sp'
+                on_release: app.root.current = 'signup'
+
+            Widget:
+                size_hint_y: None
+                height: dp(20)
+
+            Label:
+                id: login_status
+                text: ''
+                size_hint_y: None
+                height: self.texture_size[1]
+                color: hex('000000')  # Black color for text

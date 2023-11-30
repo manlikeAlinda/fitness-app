@@ -1,0 +1,84 @@
+#:kivy 2.0.0
+#:import dp kivy.metrics.dp
+#:import utils kivy.utils
+
+<StepsCounterScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('FAF6F0')  # Uniform creamy background color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        # Main content area
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: dp(24)
+            spacing: dp(15)
+
+            Label:
+                text: 'Step Counter'
+                size_hint_y: None
+                height: self.texture_size[1]
+                font_size: '24sp'
+                bold: True
+                color: utils.get_color_from_hex('000000')  # Black color for text
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(100)
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex('FFFFFF')  # White color for the card
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [dp(8)]
+
+                Label:
+                    id: steps_label
+                    text: '0'  # Bind this to the step count variable in your app
+                    font_size: '48sp'
+                    bold: True
+                    color: utils.get_color_from_hex('000000')  # Black color for text
+
+            # Calories Burned
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: 'Calories Burned: 0 kcal'  # Bind this to the calories burned variable
+                    color: utils.get_color_from_hex('000000')
+
+            # Distance Travelled
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: 'Distance: 0 km'  # Bind this to the distance variable
+                    color: utils.get_color_from_hex('000000')
+
+            # Time Active
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                Label:
+                    text: 'Active Time: 0 min'  # Bind this to the active time variable
+                    color: utils.get_color_from_hex('000000')
+
+            #lets add a button to go back to the main screen
+            Button:
+                text: 'Back to Main Screen'
+                size_hint_y: None
+                height: dp(40)
+                on_release: app.root.current = 'dashboard'
+                background_color: utils.get_color_from_hex('000000')
+                color: utils.get_color_from_hex('FFFFFF')
+                font_size: '16sp'
+                bold: True
+                pos_hint: {'center_x': 0.5}

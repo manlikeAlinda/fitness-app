@@ -1,0 +1,168 @@
+#:kivy 2.0.0
+#:import dp kivy.metrics.dp
+#:import utils kivy.utils
+#:import hex kivy.utils.get_color_from_hex
+
+<DashboardScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: hex('FAF6F0')  # Light creamy background color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDScreen:
+                MDBottomNavigation:
+                    selected_color_background: hex('F4EAE0')  # Creamy orange for selected tab background
+                    text_color_active: hex('000000')  # Black color for active tab text
+
+                    MDBottomNavigationItem:
+                        name: 'screen 1'
+                        text: 'Dashboard'
+                        icon: 'home-variant-outline'
+
+                        FloatLayout:  # Use FloatLayout for easier positioning
+                            canvas.before:
+                                Color:
+                                    rgba: hex('FAF6F0')  # Light creamy background color
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+
+                            GridLayout:
+                                cols: 2
+                                size_hint: None, None
+                                width: self.minimum_width
+                                height: self.minimum_height
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Center the grid in the FloatLayout
+                                spacing: dp(10)
+                                padding: dp(10)
+                                row_default_height: dp(120)  # Adjust the height as needed
+                                row_force_default: True
+                                canvas.before:
+                                    Color:
+                                        rgba: hex('FAF6F0')  # Light creamy background color
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+
+                                # Card: Start Training
+                                MDCard:
+                                    size_hint: None, None
+                                    size: dp(150), dp(100)  # Adjust the size as needed
+                                    
+                                    #when clicked, switch to the training screen
+                                    on_release:
+                                        app.root.current = 'training'  # Navigate to the 'training' screen
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        MDLabel:
+                                            text: 'Start Training'
+                                            theme_text_color: 'Custom'
+                                            #text color white
+                                            text_color: hex('ffffff')
+                                            halign: 'center'
+                                        MDIconButton:
+                                            icon: 'run'
+                                            pos_hint: {'center_x': 0.5}
+
+                                # Card: Measure Heart Rate
+                                MDCard:
+                                    size_hint: None, None
+                                    size: dp(150), dp(100)
+                                    
+                                    on_release:
+                                        app.root.current = 'heart_rate'  # Navigate to the 'heart_rate' screen
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        MDLabel:
+                                            text: 'Heart Rate'
+                                            theme_text_color: 'Custom'
+                                            text_color: hex('ffffff')
+                                            halign: 'center'
+                                        MDIconButton:
+                                            icon: 'heart-pulse'
+                                            pos_hint: {'center_x': 0.5}
+
+
+                                # Card: Steps Counter
+                                MDCard:
+                                    size_hint: None, None
+                                    size: dp(150), dp(100)
+                                    
+                                    on_release:
+                                        app.root.current = 'steps_counter'  # Navigate to the 'steps_counter' screen
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        MDLabel:
+                                            text: 'Steps Counter'
+                                            theme_text_color: 'Custom'
+                                            #text color white
+                                            text_color: hex('ffffff')
+                                            halign: 'center'
+                                        MDIconButton:
+                                            icon: 'walk'
+                                            pos_hint: {'center_x': 0.5}
+
+                                # Card: Goal Setting
+                                MDCard:
+                                    size_hint: None, None
+                                    size: dp(150), dp(100)
+                                    
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        MDLabel:
+                                            text: 'Goal Setting'
+                                            theme_text_color: 'Custom'
+                                            #text color white
+                                            text_color: hex('ffffff')
+                                            halign: 'center'
+                                        MDIconButton:
+                                            icon: 'bullseye-arrow'
+                                            pos_hint: {'center_x': 0.5}
+                                            
+                    MDBottomNavigationItem:
+                        name: 'screen 2'
+                        text: 'Account'
+                        icon: 'account-outline'
+
+                        FloatLayout:
+                            canvas.before:
+                                Color:
+                                    rgba: hex('FAF6F0')  # Light creamy background color
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+
+                            MDLabel:
+                                id: username
+                                text: 'Hi, ' + (app.current_user['username'] if app.current_user else '')
+                                halign: 'center'
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                                theme_text_color: 'Custom'
+                                text_color: hex('000000')  # Black text color
+
+                            MDLabel:
+                                id: email
+                                text: 'Email: ' + (app.current_user['email'] if app.current_user else '')
+                                halign: 'center'
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                                theme_text_color: 'Custom'
+                                text_color: hex('000000')  # Black text color
+
+                            Button:
+                                text: 'Logout'
+                                size_hint: None, None
+                                size: dp(100), dp(48)
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                                background_color: hex('000000')  # Black for the button background
+                                color: hex('FAF6F0')  # Light creamy text color
+                                on_press: root.logout()
+
+                                
+
